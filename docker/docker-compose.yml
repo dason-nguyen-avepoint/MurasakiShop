@@ -1,0 +1,55 @@
+# docker/docker-compose.yml
+version: '3.8'
+
+services:
+  # SQL Server
+  murasaki-sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: murasaki-sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=sa123456@
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - murasaki-network
+
+  # Product API
+  murasaki-product-api:
+    build:
+      context: ../
+      dockerfile: src/Services/MurasakiShop.Product.API/Dockerfile
+    container_name: murasaki-product-api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=murasaki-sqlserver,1433;Database=ProductDb;User Id=sa;Password=sa123456@;TrustServerCertificate=true;
+    ports:
+      - "5001:80"
+    depends_on:
+      - murasaki-sqlserver
+    networks:
+      - murasaki-network
+
+  # API Gateway
+  murasaki-gateway:
+    build:
+      context: ../
+      dockerfile: src/ApiGateway/MurasakiShop.Gateway/Dockerfile
+    container_name: murasaki-gateway
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5000:80"
+    depends_on:
+      - murasaki-product-api
+    networks:
+      - murasaki-network
+
+volumes:
+  sqlserver_data:
+
+networks:
+  murasaki-network:
+    driver: bridge

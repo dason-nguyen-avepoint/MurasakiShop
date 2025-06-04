@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "+4/bVB/FtqMulJ2V8jyJ2S4y0sEBSQN8vlQX0333UOQ=",
+  "Source": "murasakishop.gateway",
+  "BasePath": "_content/murasakishop.gateway",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

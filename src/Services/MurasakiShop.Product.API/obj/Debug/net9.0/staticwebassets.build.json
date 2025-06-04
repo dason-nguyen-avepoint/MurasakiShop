@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "mtJe3NLL/WSiMuNpqw3u1MC/SgJ7cLIOerWT6IaQ/nQ=",
+  "Source": "murasakishop.product.api",
+  "BasePath": "_content/murasakishop.product.api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
